@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rajendra's To Do List</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <main>
+        <h1>Heading - To do app</h1>
+        <form action="/create-todo" method="post">
+            <div class="description-input">
+                <input type="text" name="description" required placeholder="Enter your task here">
+            </div>
+            <div class="category-date">
+                <select name="category" id="category">
+                    <option value="personal">Personal</option>
+                    <option value="work">Work</option>
+                    <option value="school">School</option>
+                    <option value="home">Home</option>
+                </select>
+    
+                <input type="date" name="date" id="date">
+            </div>
+            <button type="submit">Add</button>
+            <button type="button">Delete</button>
+        </form>
+        <div class="todo-list">
+            <% for(let i of todo_list ) {%>
+                <div class="list-card">
+                    <input type="checkbox" name="checkbox" id="checkbox">
+                    <div class="mid-card">
+                        <h3><%= i.description %></h3>
+                        <p><%= i.date %></p>
+                    </div>
+                    <div class="end-card">
+                        <div class="tag">
+                            <h3><%= i.category %></h3>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    </main>
+</body>
+</html>
