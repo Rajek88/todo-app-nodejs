@@ -27,8 +27,8 @@ main{
 /* ************************************** Main form  and its components ************************************************ */
 
 #main-form{
-    position: sticky;
-    top: 0%;
+    /* position: sticky;
+    top: 0%; */
     background-color: white;
     padding: 30px 0px;
     width: 100%;
@@ -36,6 +36,13 @@ main{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.label{
+    text-align: left; 
+    width: 100%;
+    margin-top: 0%;
+    max-width: 400px;
 }
 
 .description-input{
@@ -100,6 +107,7 @@ main{
     flex-direction: column-reverse;
     justify-content: center;
     align-items: center;
+    margin-bottom: 30px;
 }
 
 .list-card{

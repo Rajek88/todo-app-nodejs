@@ -14,21 +14,27 @@
 <body>
     <!-- ************************************ Main Section ****************************** -->
     <main>
-        <h1>Rajendra's - To do app</h1>
         <form action="/create-todo" method="post" id="main-form">
+            <h1>Rajendra's - To do app</h1>
+            <p class="label">Description</p>
             <div class="description-input">
                 <input type="text" name="description" required placeholder="Enter your task here">
             </div>
             <div class="category-date">
-                <select name="category" id="category">
-                    <option value='{"categoryName":"","tagColor":"transparent"}'>Choose Category</option>
-                    <option value='{"categoryName":"Personal","tagColor":"#BA68C8"}'>Personal</option>
-                    <option value='{"categoryName":"Work","tagColor":"blue"}'>Work</option>
-                    <option value='{"categoryName":"School","tagColor":"orange"}'>School</option>
-                    <option value='{"categoryName":"Home","tagColor":"#00BCD4"}'>Home</option>
-                </select>
-    
-                <input type="datetime-local" name="date" id="date">
+                <div>
+                    <p class="label">Category</p>
+                    <select name="category" id="category">
+                        <option value='{"categoryName":"","tagColor":"transparent"}'>Choose Category</option>
+                        <option value='{"categoryName":"Personal","tagColor":"#BA68C8"}'>Personal</option>
+                        <option value='{"categoryName":"Work","tagColor":"blue"}'>Work</option>
+                        <option value='{"categoryName":"School","tagColor":"orange"}'>School</option>
+                        <option value='{"categoryName":"Home","tagColor":"#00BCD4"}'>Home</option>
+                    </select>
+                </div>
+                <div>
+                    <p class="label">Description</p>
+                    <input type="datetime-local" name="date" id="date">
+                </div>
             </div>
             <div class="btn-div">
                 <button type="submit" id="addBtn"><i class="far fa-plus-square"></i> &nbsp; Add</button>
