@@ -1,5 +1,147 @@
+/* ************************************** body ************************************************ */
 body{
+    width: 100%;
     padding: 0%;
     margin: 0%;
-    background-color:bisque;
+    background-color:white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+/* ************************************** main section ************************************************ */
+
+main{
+    width: 90%;
+    /* background-color: aqua; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* ************************************** Main form  and its components ************************************************ */
+
+#main-form{
+    position: sticky;
+    top: 0%;
+    background-color: white;
+    padding: 30px 0px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.description-input{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.description-input input{
+    width: 100%;
+    max-width: 370px;  /*************  Added internal padding of 15*2 px *************************/
+    outline: none;
+    text-decoration: none;
+    padding: 10px 15px;
+    font-size: 20px;
+    border: 1px solid black;
+}
+
+.category-date{
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+}
+
+.category-date select{
+    height: 30px;
+    width: 150px;
+}
+
+.category-date input{
+    height: 30px;
+    width: 200px;
+}
+
+#addBtn{
+    padding: 10px 20px;
+    color: white;
+    font-size: 18px;
+    border : none;
+    background-color: rebeccapurple;
+}
+
+
+#delBtn{
+    padding: 10px 20px;
+    color: white;
+    font-size: 18px;
+    border : none;
+    background-color: tomato;
+}
+
+
+.todo-list{
+    width: 90%;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+}
+
+.list-card{
+    display: flex;
+    width: 100%;
+    padding: 0px 10px;
+    max-width: 800px;
+    align-items: center;
+    background-color: rgb(208, 216, 255);
+    /* border : 1px solid gray; */
+}
+
+.list-card #checkbox{
+    justify-self: flex-start;
+    margin-right: 10px;
+}
+
+.list-card .mid-card{
+    flex-grow: 1;
+    justify-content: flex-start;
+    /* border: 1px solid green; */
+}
+
+.list-card .mid-card p{
+    color: rgb(49, 49, 49);
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.list-card .end-card{
+    width: 80px;
+    margin: 0px 1px;
+    justify-content: flex-end;
+    /* border: 1px solid black; */
+}
+
+/* *********************************** List Tag ********************************************** */
+.tag{
+    width: 80px;
+    padding: 0.5px 0px;
+    text-align: center;
+    font-size: 10px;
+    border-radius: 5px;
+    color: white;
 }

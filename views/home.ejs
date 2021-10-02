@@ -5,44 +5,116 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rajendra's To Do List</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+    <!-- ************************************ Main Section ****************************** -->
     <main>
-        <h1>Heading - To do app</h1>
-        <form action="/create-todo" method="post">
+        <h1>Rajendra's - To do app</h1>
+        <form action="/create-todo" method="post" id="main-form">
             <div class="description-input">
                 <input type="text" name="description" required placeholder="Enter your task here">
             </div>
             <div class="category-date">
                 <select name="category" id="category">
-                    <option value="personal">Personal</option>
-                    <option value="work">Work</option>
-                    <option value="school">School</option>
-                    <option value="home">Home</option>
+                    <option value='{"categoryName":"","tagColor":"transparent"}'>Choose Category</option>
+                    <option value='{"categoryName":"Personal","tagColor":"#BA68C8"}'>Personal</option>
+                    <option value='{"categoryName":"Work","tagColor":"blue"}'>Work</option>
+                    <option value='{"categoryName":"School","tagColor":"orange"}'>School</option>
+                    <option value='{"categoryName":"Home","tagColor":"#00BCD4"}'>Home</option>
                 </select>
     
-                <input type="date" name="date" id="date">
+                <input type="datetime-local" name="date" id="date">
             </div>
-            <button type="submit">Add</button>
-            <button type="button">Delete</button>
+            <div class="btn-div">
+                <button type="submit" id="addBtn"><i class="far fa-plus-square"></i> &nbsp; Add</button>
+                <!-- for delete button , I am calling delStackCaller() -->
+                <button type="button" id="delBtn" onclick="delStackCaller()"><i class="fas fa-trash-alt"></i> &nbsp; Delete</button>
+            </div>
         </form>
+
+        <!-- **************************************** To do List ************************************ -->
         <div class="todo-list">
             <% for(let i of todo_list ) {%>
                 <div class="list-card">
-                    <input type="checkbox" name="checkbox" id="checkbox">
+                    <!-- whenever the checkbox is clicked, it will add or remove its id from delStack array -->
+                    <input type="checkbox" name="checkbox" id="checkbox" value="<%= i._id %>" onclick="putInDelStack('<%= i._id %>', this)">
                     <div class="mid-card">
                         <h3><%= i.description %></h3>
-                        <p><%= i.date %></p>
+                        <p><i class="far fa-calendar-alt"></i> &nbsp; <%= i.date %></p>
                     </div>
                     <div class="end-card">
-                        <div class="tag">
+                        <!-- I am taking the tagColor along with option to make things easy and managable -->
+                        <div class="tag" style="background-color: <%= i.tagColor %>">
                             <h3><%= i.category %></h3>
                         </div>
                     </div>
                 </div>
+                <hr style="width: 100% ; height: 1px; color: black;">
             <% } %>
         </div>
     </main>
+    <script>
+        // I created an empty array to store th eids of all the checked lists
+        var delStack = [];
+
+        //this function checks if the id exists in to be deleted or not, if not it will add it to the array and make its description line through
+        // and vice versa  
+        function putInDelStack(id, context){
+            //I am taking context to manipulaate DOM Tree
+            let striker = context.parentElement;
+            console.log('DelStack called');
+            console.log(delStack);
+
+            if( delStack.includes(id) === false){
+                delStack.push(id);
+                console.log(striker.querySelector('.mid-card').querySelector('h3'));
+                striker.querySelector('.mid-card').querySelector('h3').style.textDecoration = 'line-through';
+            }
+            else{
+                let curretIndex = delStack.indexOf(id);
+                delStack.splice(curretIndex, 1);
+                console.log(striker.querySelector('.mid-card').querySelector('h3'));
+                striker.querySelector('.mid-card').querySelector('h3').style.textDecoration = 'none';
+            }
+        }
+
+        function delStackCaller(){
+
+            //when this function get called, it will iterate over all ids to be deleted and will make a post request to /delete-todo
+            //and this wil delete the list
+            for(let ele of delStack){
+                //call the express del function and pass id
+
+                //making an asynch post request from JS
+                console.log(ele);
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", '/delete-todo', true);
+                xhr.setRequestHeader('Content-type', 'application/json');
+                xhr.onreadystatechange = function() { // Call a function when the state changes.
+                    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                        // Request finished. Do processing here.
+                        console.log('request success');
+                        //finally refreshing the page to show changes
+                        location.reload();
+                    }
+                }
+
+                //first before sending convert the object into string and then send it.
+                xhr.send(JSON.stringify(
+                    {
+                        todelete : ele,
+                    }
+                ));
+                console.log(JSON.stringify({
+                    todelete : ele,
+                }));
+            }
+        }
+    </script>
 </body>
 </html>

@@ -1,3 +1,4 @@
+// ******************************** Schema for TODO List ****************************************
 const mongoose = require('mongoose');
 
 const todoSchema = new mongoose.Schema({
@@ -6,6 +7,10 @@ const todoSchema = new mongoose.Schema({
         required : true,
     },
     category : {
+        type : String,
+        required : false,
+    },
+    tagColor : {
         type : String,
         required : false,
     },
